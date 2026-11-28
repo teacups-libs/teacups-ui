@@ -2,6 +2,21 @@
 
 Reusable Avalonia control styles.
 
+## Root view
+
+Use `RootView` as the app shell. Set `MainContent` to your app view or to a `DrawerSheet` that wraps the app's `NavigationPage` and hosts app-wide dialogs. The shell places separate snackbar and toast layers above `MainContent`.
+
+```xml
+<controls:RootView xmlns="https://github.com/avaloniaui"
+                   xmlns:controls="clr-namespace:Okisioli.Teacups.UI.Controls.Avalonia;assembly=Okisioli.Teacups.UI.Controls.Avalonia">
+  <controls:RootView.MainContent>
+    <TextBlock Text="App content" />
+  </controls:RootView.MainContent>
+</controls:RootView>
+```
+
+See the [Avalonia demo startup](../../demo/Okisioli.Teacups.UI.Demo.Avalonia/App.axaml.cs) for the shell with dialog and popup services.
+
 ## Drawer sheet
 
 `DrawerSheet` overlays optional `SheetContent` and scrolls it when it exceeds the available space.
@@ -31,7 +46,7 @@ Import the style dictionary in your application resources:
 Then apply the `circular` class to an ordinary `ProgressBar`. The ring uses `Foreground` for the filled part and `Background` for the empty part.
 
 ```xml
-<ProgressBar xmlns:local="clr-namespace:Okisioli.Teacups.UI.Controls.Avalonia;assembly=Okisioli.Teacups.UI.Controls.Avalonia"
+<ProgressBar xmlns:controls="clr-namespace:Okisioli.Teacups.UI.Controls.Avalonia;assembly=Okisioli.Teacups.UI.Controls.Avalonia"
              Classes="circular"
              Width="160"
              Height="160"
@@ -40,8 +55,8 @@ Then apply the `circular` class to an ordinary `ProgressBar`. The ring uses `For
              Value="64"
              Foreground="DodgerBlue"
              Background="#303030"
-             local:CircularProgress.RingThickness="12"
-             local:CircularProgress.Reverse="False" />
+             controls:CircularProgress.RingThickness="12"
+             controls:CircularProgress.Reverse="False" />
 ```
 
 `RingThickness` is measured in device-independent pixels. The style fits the circle inside the shortest control dimension.
