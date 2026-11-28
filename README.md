@@ -19,6 +19,14 @@ Stuff that I (and many of us) wrote many times over and over again. And even if 
 | [Okisioli.Teacups.UI.Behaviors.Avalonia](src/Okisioli.Teacups.UI.Behaviors.Avalonia)<br>[Okisioli.Teacups.UI.Behaviors.WPF](src/Okisioli.Teacups.UI.Behaviors.WPF) | XAML interaction behaviors.<ul><li>Long press on any element</li><li>List item double-click commands</li><li>Text box submission and tag entry</li></ul> |
 | [Okisioli.Teacups.UI.Fastr.WPF](src/Okisioli.Teacups.UI.Fastr.WPF) | Buffered item sources, incremental collection updates, and optional scroll resets for WPF item controls. |
 
+## Usage
+
+Use [`RootView`](src/Okisioli.Teacups.UI.Controls.Avalonia/README.md#root-view) as the shell for a new Avalonia app. Put your app view in `MainContent`. To add app-wide dialogs, wrap the app's `NavigationPage` in a dedicated `DrawerSheet` and use that sheet as `MainContent`. Individual pages can still use their own drawers. `RootView` adds an interactive snackbar layer and a passive toast layer above the app and its dialogs. Pass the root to `PopupService` to show toasts and snackbars. See the [Avalonia demo startup](demo/Okisioli.Teacups.UI.Demo.Avalonia/App.axaml.cs) for the wiring.
+
+To build your own shell, layer the app content (or its dialog sheet), an interactive snackbar presenter, and a toast presenter with hit testing disabled in a `Grid`, in that order. A custom shell supplies its own popup wiring because `PopupService` takes a `RootView`.
+
+For WPF and Avalonia, use the platform package's implementation of `IDispatcherService` to queue work on the UI thread and `IDialogService<TViewModel, TView>` to show a dialog for a view model and await whether it was accepted.
+
 ## Demos
 
 - [WPF Controls](demo/Okisioli.Teacups.UI.Demo.WPF)
